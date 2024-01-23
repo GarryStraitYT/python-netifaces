@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Check for necessary tools
+if ! command -v gcc &> /dev/null
+then
+    echo "GCC could not be found. Please install it and try again."
+    exit 1
+fi
+
+# Check for necessary libraries
+if ! ldconfig -p | grep libnetifaces &> /dev/null
+then
+    echo "libnetifaces could not be found. Please install it and try again."
+    exit 1
+fi
+
+# Create a Makefile
+cat > Makefile << EOF
+all: netifaces
+
+netifaces: netifaces.c
+\tgcc -o netifaces netifaces.c -lnetifaces
+
+clean:
+\trm -f netifaces
+EOF
+
+echo "Configuration successful. You can now build the project using 'make'."
