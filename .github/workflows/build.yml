@@ -4,9 +4,9 @@ on:
   push:
     branches: [ master ]
 
-  jobs:
-    build:
-      runs-on: windows-latest
+jobs:
+  build:
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -33,13 +33,12 @@ on:
       id: create_release
       uses: actions/create-release@v1
       env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      tag_name: ${{ github.sha }}
-      release_name: Release ${{ github.sha }}
-      draft: false
-      prerelease: false
-
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
+        draft: false
+        prerelease: false
 
     - name: Upload Release Asset
       id: upload-release-asset 
