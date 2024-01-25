@@ -27,3 +27,9 @@ jobs:
 
     - name: Build binary
       run: python setup.py bdist_wheel
+    
+    - name: Upload As Release
+      uses: AButler/upload-release-assets@v3.0
+          with:
+            files: ".\dist\*.whl"
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
